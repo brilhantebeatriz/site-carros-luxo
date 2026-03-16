@@ -1,0 +1,881 @@
+let modeloAtual = null;
+
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+const carros = {
+
+  // CARRO INTRO - LAMBORGHINI REVUELTO
+
+  "Revuelto": {
+    titulo: "Lamborghini Revuelto",
+    imagem: "imagens/LamborghiniRevueltoBranca.png",
+    descricao: `
+      Motor: V12 6.498 cm³ naturalmente aspirado + 3 motores elétricos<br>
+      Potência: 825 cv (V12) + 3×150 cv = 1.015 cv combinados<br>
+      Aceleração: 0–100 km/h em 2,5 s<br>
+      Velocidade máxima: 350 km/h<br>
+      Transmissão: automatizada DCT de 8 marchas com embreagem dupla<br>
+      Tração: integral sob demanda (4×4)<br>
+      Consumo médio: ~10,3 km/l combinado (urbano ~4 km/l / estrada ~7 km/l)<br>
+      Preço: estimado entre €654.000 e US$650.000 (~R$ 3.500.000 no Brasil) ✨<br>
+      Capacidade do tanque: 85 L<br>
+      Porta-malas: 140 L (dianteiro)<br>
+      Equipamentos de série: chassi monocoque em fibra de carbono; freios carbono-cerâmicos; suspensão ativa; 3 telas digitais (12,3″ + 8,4″ + 9,1″); novo sistema de info‑entretenimento com Alexa; 7 modos de condução incluindo elétrico "Città"; sistema de direção assistida Nível 2; rodas 20"/21"; acabamento premium com couro e microfibras recicladas<br>
+      Garantia: 2 anos de fábrica
+    `
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+   // CARROS DA PORSCHE
+  "911Carrera": {
+    titulo: "Porsche 911 Carrera",
+    imagem: "imagens/porsche911CarreraBranca.png",
+    descricao: `
+      Motor: 3.0 litros Boxer Turbo, 6 cilindros<br>
+      Potência: 385 cv<br>
+      Aceleração: 0 a 100 km/h em 4,2 segundos<br>
+      Velocidade máxima: 293 km/h<br>
+      Transmissão: Automática de 8 velocidades (PDK)<br>
+      Tração: Traseira<br>
+      Consumo médio: Aproximadamente 10 km/l na cidade<br>
+      Preço: A partir de R$ 850.000<br>
+      Capacidade do tanque: 64 litros<br>
+      Porta-malas: 132 litros<br>
+      Equipamentos de série: Tela touchscreen, ar-condicionado digital, sistema de som premium, freios ABS, airbags frontais e laterais, controle de estabilidade<br>
+      Garantia: 3 anos ou 100.000 km
+    `
+  },
+
+  "718Cayman": {
+    titulo: "Porsche 718 Cayman GT4 RS",
+    imagem: "imagens/Porsche_718_Cayman_GT4_RSPreta.png",
+    descricao: `
+      Motor: 4.0 L boxer naturalmente aspirado<br>
+      Potência: 500 cv<br>
+      Aceleração: 0‑100 km/h em 3,4 s<br>
+      Velocidade máxima: 315 km/h<br>
+      Transmissão: 7 marchas PDK<br>
+      Tração: Traseira<br>
+      Consumo médio: ~12 km/l<br>
+      Porta-malas: 425 L<br>
+      Capacidade do tanque: ~64 L<br>
+      Preço: R$ 1.235.529<br>
+      Garantia: 4 anos ou 120.000 km<br>
+    `}, 
+
+  "Taycan": {
+    titulo: "Porsche Taycan",
+    imagem: "imagens/porscheTaycan.png",
+    descricao: `
+      Motor: elétrico (várias versões)<br>
+      Potência: até ~761 cv (Turbo S)<br>
+      Aceleração: 0‑100 km/h em ~2,8 s (Turbo S)<br>
+      Velocidade máxima: ~260 km/h<br>
+      Transmissão: automática elétrica<br>
+      Tração: integral ou traseira<br>
+      Consumo médio: 20–25 kWh/100 km<br>
+      Porta-malas: 447 L (sedã) / até 530 L (Cross) + frunk<br>
+      Capacidade do tanque: – (elétrico)<br>
+      Price: a partir de ~R$ 700.000<br>
+      Garantia: 4 anos ou 100.000 km<br>
+    `}, 
+
+  "MacanEV": {
+    titulo: "Porsche Macan EV",
+    imagem: "imagens/PorscheMacanEV.png",
+    descricao: `
+      Motor: elétrico (340–639 cv variando por versão)<br>
+      Potência: até 639 cv (Turbo EV)<br>
+      Aceleração: 0‑100 km/h em ~4,1 s (Turbo EV)<br>
+      Velocidade máxima: até 240 km/h<br>
+      Transmissão: elétrica automática<br>
+      Tração: traseira ou integral<br>
+      Autonomia: até ~443 km (Inmetro)<br>
+      Porta-malas traseiro: 540 L + frunk 84 L (total ~624 L)<br>
+      Capacidade do tanque: – (elétrico)<br>
+      Preço: a partir de ~R$ 580.000<br>
+      Garantia: 3 anos ou 80.000 km<br>
+    `}, 
+
+  "718Boxster": {
+    titulo: "Porsche 718 Boxster",
+    imagem: "imagens/Porsche718Boxster.png",
+    descricao: `
+      Motor: 2.0 L turbo (base) / 4.0 L (GTS 4.0)<br>
+      Potência: 300 cv (base) a 400 cv (GTS)<br>
+      Aceleração: 0‑100 km/h em 4,9 s (base)<br>
+      Velocidade máxima: até 275 km/h<br>
+      Transmissão: manual ou 7 marchas PDK<br>
+      Tração: traseira<br>
+      Consumo médio: ~12 km/l<br>
+      Porta-malas: 150 L (traseiro) + 125 L (frunk) ≈ 275 L<br>
+      Capacidade do tanque: 64 L<br>
+      Preço: base desde R$ 555.000<br>
+      Garantia: 3 anos ou 100.000 km<br>
+    `},  
+
+  "PanameraTurboEHybrid": {
+    titulo: "Porsche Panamera Turbo E‑Hybrid",
+    imagem: "imagens/PorschePanameraTurboE-Hybrid.png",
+    descricao: `
+      Motor: V8 4.0 L biturbo + elétrico<br>
+      Potência combinada: ~690 cv (Turbo S ~760 cv)<br>
+      Aceleração: 0‑100 km/h em ~3,2 s<br>
+      Velocidade máxima: 315 km/h<br>
+      Transmissão: 8 marchas PDK<br>
+      Tração: integral<br>
+      Consumo médio: híbrido plug‑in ~2,7 L/100 km<br>
+      Porta-malas: ~403 L (sedã/hatch) + espaço até ~1.255 L com bancos rebatidos<br>
+      Capacidade do tanque: 80 L<br>
+      Preço: ~US$235.000 (~R$1.200.000+) 2025 :contentReference[oaicite:5]{index=5}<br>
+      Garantia: 4 anos ou 120.000 km<br>
+    `},
+    
+
+
+
+
+
+
+
+
+
+    // CARROS DA LAMBORGHINIII
+
+  "Huracan": {
+    titulo: "Lamborghini Huracán Evo",
+    imagem: "imagens/LamborghiniHuracanBranca.png",
+    descricao: `
+      Motor: 5.2 L V10 naturalmente aspirado<br>
+      Potência: 640 cv<br>
+      Aceleração: 0‑100 km/h em 2,9 s<br>
+      Velocidade máxima: 325 km/h<br>
+      Transmissão: Automática de 7 marchas (DCT)<br>
+      Tração: Integral (AWD)<br>
+      Consumo médio: ~14,5 L/100 km<br>
+      Porta-malas: ~100 L traseiro + ~50 L frunk = ~150 L<br>
+      Capacidade do tanque: 83 L<br>
+      Preço: R$ 1.050.000 (oferta)<br>
+      Garantia: 3 anos ou 120 000 km<br>
+    `}, 
+
+  "Aventador": {
+    titulo: "Lamborghini Aventador S",
+    imagem: "imagens/LamborghiniAventadorPreta.png",
+    descricao: `
+      Motor: 6.5 L V12 naturalmente aspirado<br>
+      Potência: 740 cv (modelos S) até 780 cv (Ultimae)<br>
+      Aceleração: 0‑100 km/h em 2,9 s<br>
+      Velocidade máxima: 355 km/h<br>
+      Transmissão: Automática sequencial ISR<br>
+      Tração: Integral (AWD)<br>
+      Consumo médio: ~16 mpg ≈ 14 L/100 km<br>
+      Porta-malas: ~100 L traseiro<br>
+      Capacidade do tanque: 85 L<br>
+      Preço: R$ 1.500.000 (um pouco menor)<br>
+      Garantia: 4 anos ou 140 000 km<br>
+    `},  
+
+  "UrusPerformante": {
+    titulo: "Lamborghini Urus Performante",
+    imagem: "imagens/LamborghiniUrusPerformante.png",
+    descricao: `
+      Motor: 4.0 L V8 biturbo<br>
+      Potência: 666 cv<br>
+      Aceleração: 0‑100 km/h em 3,6 s<br>
+      Velocidade máxima: 305 km/h<br>
+      Transmissão: Automática de 8 marchas<br>
+      Tração: Integral (AWD)<br>
+      Consumo médio: ~16 mpg ≈ 14 L/100 km<br>
+      Porta-malas: 580 L<br>
+      Capacidade do tanque: 90 L<br>
+      Preço: R$ 1.200.000 (leve desconto)<br>
+      Garantia: 3 anos ou 100 000 km<br>
+    `},  
+
+  "SianFKP37": {
+    titulo: "Lamborghini Sián FKP 37",
+    imagem: "imagens/LamborghiniSianFKP37.png",
+    descricao: `
+      Motor: 6.5 L V12 + híbrido (48 V)<br>
+      Potência total: 819 cv<br>
+      Aceleração: 0‑100 km/h em 2,8 s<br>
+      Velocidade máxima: 355 km/h<br>
+      Transmissão: 7 marchas (ISR automática)<br>
+      Tração: Integral<br>
+      Consumo médio: ~5 km/L<br>
+      Porta-malas: ~100 L traseiro<br>
+      Capacidade do tanque: 65 L<br>
+      Preço: R$ 2.700.000 (colecionador)<br>
+      Garantia: 2 anos ou 80 000 km<br>
+    `}, 
+
+  "Centenario": {
+    titulo: "Lamborghini Centenario",
+    imagem: "imagens/LamborghiniCentenario.png",
+    descricao: `
+      Motor: 6.5 L V12 naturalmente aspirado<br>
+      Potência: 770 cv<br>
+      Aceleração: 0‑100 km/h em 2,8 s<br>
+      Velocidade máxima: ~350 km/h<br>
+      Transmissão: Automática F1 de 7 marchas<br>
+      Tração: Integral<br>
+      Consumo médio: ~15 L/100 km<br>
+      Porta-malas: ~90 L traseiro<br>
+      Capacidade do tanque: 82 L<br>
+      Preço: R$ 3.000.000 (edição limitada)<br>
+      Garantia: 2 anos ou 100 000 km<br>
+    `},  
+
+  "SestoElemento": {
+    titulo: "Lamborghini Sesto Elemento",
+    imagem: "imagens/LamborghiniSestoElemento.png",
+    descricao: `
+      Motor: 5.2 L V10 naturalmente aspirado<br>
+      Potência: 640 cv<br>
+      Aceleração: 0‑100 km/h em 3,4 s<br>
+      Velocidade máxima: 325 km/h<br>
+      Transmissão: Automática de 7 marchas (DCT)<br>
+      Tração: Integral com ajustes off‑road<br>
+      Consumo médio: ~15 L/100 km<br>
+      Porta-malas: ~150 L (mesma base do Huracán)<br>
+      Capacidade do tanque: 83 L<br>
+      Preço: R$ 1.150.000 (oferta jipe esportivo)<br>
+      Garantia: 3 anos ou 120 000 km<br>
+    `},
+
+
+
+
+
+
+
+
+
+
+    // CARROS DA FERRARIRIAIRI
+
+    "812Superfast": {
+    titulo: "Ferrari 812 Superfast",
+    imagem: "imagens/Ferrari812SuperfastPreta.png",
+    descricao: `
+      Motor: 6.5 L V12 naturalmente aspirado<br>
+      Potência: 800 cv<br>
+      Aceleração: 0‑100 km/h em 2,9 s<br>
+      Velocidade máxima: 340 km/h<br>
+      Transmissão: Automática de 7 marchas<br>
+      Tração: Traseira<br>
+      Consumo médio: ~15 L/100 km<br>
+      Porta-malas: 320 L traseiro<br>
+      Capacidade do tanque: 92 L<br>
+      Preço: R$ 3.800.000 (desconto)<br>
+      Garantia: 3 anos ou 120.000 km<br>
+    `}, 
+
+  "SF90Stradale": {
+    titulo: "Ferrari SF90 Stradale",
+    imagem: "imagens/FerrariSF90Stradale.png",
+    descricao: `
+      Motor: 4.0 L V8 + 3 motores elétricos (PHEV)<br>
+      Potência: 1000 cv<br>
+      Aceleração: 0‑100 km/h em 2,5 s (estimado)<br>
+      Velocidade máxima: ~340 km/h<br>
+      Transmissão: Automática PDK de 8 marchas<br>
+      Tração: Integral<br>
+      Consumo médio: variável<br>
+      Porta-malas: 74 L traseiro<br>
+      Capacidade do tanque: 68 L<br>
+      Preço: R$ 2.200.000 (promoção)<br>
+      Garantia: 4 anos ou 160.000 km<br>
+    `}, 
+
+  "458Italia": {
+    titulo: "Ferrari 458 Italia",
+    imagem: "imagens/Ferrari458Italia.png",
+    descricao: `
+      Motor: 4.5 L V8 naturalmente aspirado<br>
+      Potência: 570 cv<br>
+      Aceleração: 0‑100 km/h em ≈3,4 s<br>
+      Velocidade máxima: 325 km/h<br>
+      Transmissão: Automática F1 DCT de 7 marchas<br>
+      Tração: Traseira<br>
+      Consumo médio: ~13,3 L/100 km<br>
+      Porta-malas: não especificado (geralmente ~200 L)<br>
+      Capacidade do tanque: 86 L<br>
+      Preço: R$ 1.200.000 (revenda)<br>
+      Garantia: 2 anos ou 80.000 km<br>
+    `}, 
+
+  "Purosangue": {
+    titulo: "Ferrari Purosangue",
+    imagem: "imagens/FerrariPurosangue.png",
+    descricao: `
+      Motor: 6.5 L V12 naturalmente aspirado<br>
+      Potência: 725 cv<br>
+      Aceleração: 0‑100 km/h em ~3,3 s<br>
+      Velocidade máxima: ~310 km/h<br>
+      Transmissão: Automática DCT de 8 marchas<br>
+      Tração: Integral<br>
+      Consumo médio: ~12 km/L (estimado)<br>
+      Porta-malas: (SUV, não divulgado) ~450 L estimado<br>
+      Capacidade do tanque: 100 L (estimado similar ao SUV) <br>
+      Preço: R$ 2.200.000 (promoção)<br>
+      Garantia: 4 anos ou 160.000 km<br>
+    `},
+
+  "296GTB": {
+    titulo: "Ferrari 296 GTB",
+    imagem: "imagens/Ferrari296GTB.png",
+    descricao: `
+      Motor: 3.0 L V6 biturbo + elétrico (PHEV)<br>
+      Potência: 819 cv<br>
+      Aceleração: 0‑100 km/h em ~2,9 s<br>
+      Velocidade máxima: ~330 km/h<br>
+      Transmissão: Automática DCT de 8 marchas<br>
+      Tração: Traseira<br>
+      Consumo médio: ~16 km/L<br>
+      Porta-malas: ~240 L<br>
+      Capacidade do tanque: 68 L<br>
+      Preço: R$ 1.600.000 (desconto)<br>
+      Garantia: 3 anos ou 120.000 km<br>
+    `}, 
+
+  "RomaSpider": {
+    titulo: "Ferrari Roma Spider",
+    imagem: "imagens/FerrariRomaSpider.png",
+    descricao: `
+      Motor: 3.9 L V8 naturalmente aspirado<br>
+      Potência: 620 cv<br>
+      Aceleração: 0‑100 km/h em 3,4 s<br>
+      Velocidade máxima: 320 km/h<br>
+      Transmissão: Automática DCT de 8 marchas<br>
+      Tração: Traseira<br>
+      Consumo médio: ~19 mpg (~12 km/L)<br>
+      Porta-malas: ~240 L (coupé similar) + pequeno espaço traseiro<br>
+      Capacidade do tanque: ~80 L (estimado) <br>
+      Preço: R$ 1.300.000 (revenda)<br>
+      Garantia: 3 anos ou 100.000 km<br>
+    `},
+
+
+
+
+
+
+
+    //CARROS DA MASERATII
+
+  "MC20Cielo": {
+    titulo: "Maserati MC20 Cielo",
+    imagem: "imagens/MaseratiMC20Cielo.png",
+    descricao: `
+      Motor: 3.0 L V6 biturbo<br>
+      Potência: 630 cv<br>
+      Aceleração: 0‑100 km/h em ~2,9 s<br>
+      Velocidade máxima: ~325 km/h<br>
+      Transmissão: DCT de 8 marchas<br>
+      Tração: Traseira<br>
+      Consumo médio: ~11,7 L/100 km<br>
+      Preço: R$ 1.300.000<br>
+      Capacidade do tanque: 60 L<br>
+      Porta-malas: ~100 L<br>
+      Equipamentos de série: teto retrátil eletrocromático, chassi monocoque de fibra de carbono, suspensão ativa, freios carbono‑cerâmicos, sistema multimídia<br>
+      Garantia: 3 anos ou 100.000 km
+    `
+  },
+
+  "GranTurismoFolgore": {
+    titulo: "Maserati GranTurismo Folgore",
+    imagem: "imagens/MaseratiGranTurismoFolgore.png",
+    descricao: `
+      Motor: 3 motores elétricos (~751 cv)<br>
+      Potência: ~751 cv<br>
+      Aceleração: 0‑100 km/h em ~2,7 s<br>
+      Velocidade máxima: ~320 km/h<br>
+      Transmissão: automática elétrica<br>
+      Tração: Integral<br>
+      Consumo médio: 18,4 kWh/100 km (WLTP)<br>
+      Preço: R$ 1.400.000<br>
+      Capacidade do tanque: – (elétrico)<br>
+      Porta-malas: ~310 L<br>
+      Equipamentos de série: carregamento CCS rápido, suspensão adaptativa, ADAS, sistema Sonus Faber, Apple CarPlay/Android Auto<br>
+      Garantia: 4 anos ou 160.000 km
+    `
+  },
+
+  "GrecaleTrofeo": {
+    titulo: "Maserati Grecale Trofeo",
+    imagem: "imagens/MaseratiGrecaleTrofeo.png",
+    descricao: `
+      Motor: 3.0 L V6 Nettuno biturbo<br>
+      Potência: 530 cv<br>
+      Aceleração: 0‑100 km/h em ~3,8 s<br>
+      Velocidade máxima: ~285 km/h<br>
+      Transmissão: automática de 8 marchas<br>
+      Tração: Integral<br>
+      Consumo médio: ~11 L/100 km<br>
+      Preço: R$ 550.000<br>
+      Capacidade do tanque: ~80 L<br>
+      Porta-malas: 570 L<br>
+      Equipamentos de série: suspensão ativa, freios Brembo, teto solar, ADAS, acabamento premium<br>
+      Garantia: 3 anos ou 120.000 km
+    `
+  },
+
+  "QuattroporteGT": {
+    titulo: "Maserati Quattroporte GT (V6)",
+    imagem: "imagens/MaseratiQuattroporteGT.png",
+    descricao: `
+      Motor: 3.0 L V6<br>
+      Potência: 430 cv<br>
+      Aceleração: 0‑100 km/h em ~5,5 s<br>
+      Velocidade máxima: ~285 km/h<br>
+      Transmissão: automática de 8 marchas<br>
+      Tração: Traseira (opcional AWD)<br>
+      Consumo médio: ~12 L/100 km<br>
+      Preço: R$ 650.000<br>
+      Capacidade do tanque: ~80 L<br>
+      Porta-malas: 500 L<br>
+      Equipamentos de série: acabamento luxo, sistema multimídia, controle de cruzeiro adaptativo, couro, ADAS<br>
+      Garantia: 4 anos ou 150.000 km
+    `
+  },
+
+  "LevanteModenaS": {
+    titulo: "Maserati Levante Modena S",
+    imagem: "imagens/MaseratiLevanteModenaS.png",
+    descricao: `
+      Motor: 3.0 L V6 biturbo<br>
+      Potência: 550 hp (~560 cv)<br>
+      Aceleração: 0‑100 km/h em ~5,2 s<br>
+      Velocidade máxima: 264 km/h<br>
+      Transmissão: automática de 8 marchas<br>
+      Tração: Integral<br>
+      Consumo médio: ~11 L/100 km<br>
+      Preço: R$ 450.000<br>
+      Capacidade do tanque: ~80 L<br>
+      Porta-malas: 540 L<br>
+      Equipamentos de série: tração Q4, suspensão adaptativa, teto solar, ADAS, interior premium<br>
+      Garantia: 3 anos ou 120.000 km
+    `
+  },
+
+  "GhibliGTHybrid": {
+    titulo: "Maserati Ghibli GT Hybrid",
+    imagem: "imagens/MaseratiGhibliGTHybrid.png",
+    descricao: `
+      Motor: 2.0 L turbo + sistema 48 V<br>
+      Potência: 330 cv<br>
+      Aceleração: 0‑100 km/h em ~5,7 s<br>
+      Velocidade máxima: ~255 km/h<br>
+      Transmissão: automática de 8 marchas<br>
+      Tração: Traseira (opcional AWD)<br>
+      Consumo médio: ~9 L/100 km<br>
+      Preço: R$ 350.000<br>
+      Capacidade do tanque: ~70 L<br>
+      Porta-malas: 500 L<br>
+      Equipamentos de série: híbrido leve, sistema DeTomaso, interior esportivo, ADAS<br>
+      Garantia: 2 anos ou 100.000 km
+    `
+  },
+
+
+
+
+
+
+
+
+
+  // CARROS DA BMW
+
+  "i7M70": {
+    titulo: "BMW i7 M70 xDrive",
+    imagem: "imagens/bmw_i7_m70.png",
+    descricao: `
+      Motor: 2 motores elétricos (traseiro + dianteiro)<br>
+      Potência: 659 cv e torque de 1.015 Nm<br>
+      Aceleração: 0‑100 km/h em ~3,7 s<br>
+      Velocidade máxima: 250 km/h (limitada)<br>
+      Transmissão: transmissão única fixa (EV)<br>
+      Tração: integral xDrive<br>
+      Consumo médio: 20,8–23,7 kWh/100 km (WLTP)<br>
+      Preço: R$ 1.800.000<br>
+      Capacidade do tanque: – (elétrico, bateria de 101,7 kWh)<br>
+      Porta-malas: 500 L<br>
+      Equipamentos de série: M Sport pack, suspensão a ar adaptativa, volante M, carregador 22 kW, eDrive Pro<br>
+      Garantia: 4 anos ou 120.000 km
+    `
+  },
+
+  "XMLabelRed": {
+    titulo: "BMW XM Label Red",
+    imagem: "imagens/bmw_xm_label_red.png",
+    descricao: `
+      Motor: V8 4.4 L biturbo + elétrico<br>
+      Potência: 748 cv, torque de 1.000 Nm<br>
+      Aceleração: 0‑100 km/h em ~3,7–3,8 s<br>
+      Velocidade máxima: 250 km/h (290 opcional)<br>
+      Transmissão: automática M Steptronic 8 marchas<br>
+      Tração: integral M xDrive<br>
+      Consumo médio: ~11 L/100 km (estimado PHEV)<br>
+      Preço: R$ 950.000<br>
+      Capacidade do tanque: ~80 L<br>
+      Porta-malas: cerca de 500 L<br>
+      Equipamentos de série: rodas 23″, interior M, sistema Curved Display, suspensão pneumática<br>
+      Garantia: 4 anos ou 150.000 km
+    `
+  },
+
+  "M3CS": {
+    titulo: "BMW M3 CS (G80)",
+    imagem: "imagens/bmw_m3_cs.png",
+    descricao: `
+      Motor: 3.0 L I6 biturbo<br>
+      Potência: 550 cv<br>
+      Aceleração: 0‑100 km/h em 3,4 s<br>
+      Velocidade máxima: 302 km/h<br>
+      Transmissão: automática M Steptronic 8 marchas<br>
+      Tração: integral xDrive<br>
+      Consumo médio: 10,1–10,4 L/100 km<br>
+      Preço: R$ 650.000<br>
+      Capacidade do tanque: ~63 L<br>
+      Porta-malas: ~480 L<br>
+      Equipamentos de série: teto de carbono, escape esportivo, bancos concha, freios M Carbon Ceramic<br>
+      Garantia: 3 anos ou 100.000 km
+    `
+  },
+
+  "i5M60": {
+    titulo: "BMW i5 M60 xDrive",
+    imagem: "imagens/bmw_i5_m60.png",
+    descricao: `
+      Motor: elétrico, dual motor<br>
+      Potência: até 601 cv<br>
+      Aceleração: ~3,8 s 0‑100 km/h<br>
+      Velocidade máxima: ~240 km/h<br>
+      Transmissão: fixa (EV)<br>
+      Tração: integral<br>
+      Consumo médio: ~20 kWh/100 km<br>
+      Preço: R$ 550.000<br>
+      Capacidade do tanque: – (bateria de 84,3 kWh)<br>
+      Porta-malas: 490 L<br>
+      Equipamentos de série: ADAS, teto panorâmico, interior M Sport, Head-up display<br>
+      Garantia: 4 anos ou 120.000 km
+    `
+  },
+
+  "Z4M40i": {
+    titulo: "BMW Z4 M40i",
+    imagem: "imagens/bmw_z4_m40i.png",
+    descricao: `
+      Motor: 3.0 L I6 turbo (B58)<br>
+      Potência: 340 cv<br>
+      Aceleração: 0‑100 km/h em ~4,2 s<br>
+      Velocidade máxima: 250 km/h<br>
+      Transmissão: automática 8 marchas<br>
+      Tração: traseira<br>
+      Consumo médio: ~9 L/100 km<br>
+      Preço: R$ 450.000<br>
+      Capacidade do tanque: ~52 L<br>
+      Porta-malas: ~281 L<br>
+      Equipamentos de série: suspensão adaptativa, som Harman Kardon, Head-up display, bancos M Sport<br>
+      Garantia: 3 anos ou 100.000 km
+    `
+  },
+
+  "X7M60i": {
+    titulo: "BMW X7 M60i",
+    imagem: "imagens/bmw_x7_m60i.png",
+    descricao: `
+      Motor: 4.4 L V8 (S68)<br>
+      Potência: 530 cv, torque 750 Nm<br>
+      Aceleração: 0‑100 km/h em ~4,7 s<br>
+      Velocidade máxima: 250 km/h<br>
+      Transmissão: automática 8 marchas<br>
+      Tração: integral xDrive<br>
+      Consumo médio: ~11 L/100 km<br>
+      Preço: R$ 700.000<br>
+      Capacidade do tanque: ~80 L<br>
+      Porta-malas: ~750 L (com 5 lugares)<br>
+      Equipamentos de série: suspensão a ar adaptativa, bancos aquecidos, sistema iDrive, teto panorâmico<br>
+      Garantia: 4 anos ou 150.000 km
+    `
+  },
+
+
+
+
+
+
+
+
+
+  // CARROS DA MERCEDES-BENZZ
+
+  "AMGGT63SE": {
+    titulo: "Mercedes‑AMG GT 63 S E Performance",
+    imagem: "imagens/mercedes_amg_gt_63_se.png",
+    descricao: `
+      Motor: 4.0 L V8 biturbo + motor elétrico (PHEV)<br>
+      Potência: ~842 cv combinados<br>
+      Aceleração: 0–100 km/h em ~2,9 s<br>
+      Velocidade máxima: 315 km/h (limitada)<br>
+      Transmissão: automática 9 marchas<br>
+      Tração: integral AMG Performance 4MATIC+<br>
+      Consumo médio: ~3,0 L/100 km (PHEV)<br>
+      Preço: R$ 1.700.000<br>
+      Capacidade do tanque: ~60 L (PHEV)<br>
+      Porta‑malas: ~350 L<br>
+      Equipamentos de série: suspensão ativa, freios carbono‑cerâmicos, pacotes AMG Tracking e Night, MBUX Performance cockpit<br>
+      Garantia: 4 anos ou 120.000 km
+    `
+  },
+
+  "MaybachEQS680": {
+    titulo: "Mercedes‑Maybach EQS 680 SUV",
+    imagem: "imagens/mercedes_maybach_eqs_680.png",
+    descricao: `
+      Motor: elétrico dual motor<br>
+      Potência: 658 cv (485 kW) <br>
+      Aceleração: 0–100 km/h em ~4,4 s<br>
+      Velocidade máxima: 210 km/h (limitada)<br>
+      Transmissão: única (EV)<br>
+      Tração: integral<br>
+      Consumo médio: 22–24 kWh/100 km<br>
+      Preço: R$ 1.900.000<br>
+      Capacidade do tanque: – (bateria de 107,8 kWh)<br>
+      Porta‑malas: ≈650 L<br>
+      Equipamentos de série: sistema Burmester 4D, bancos elétricos massagem, MBUX Hyperscreen, suspensão E‑Active Body Control<br>
+      Garantia: 4 anos ou 160.000 km
+    `
+  },
+
+  "CLE53Coupe": {
+    titulo: "Mercedes‑AMG CLE 53 Coupé",
+    imagem: "imagens/mercedes_amg_cle_53.png",
+    descricao: `
+      Motor: 3.0 L inline‑6 turbo + sistema mild‑hybrid 48 V<br>
+      Potência: 443 cv (330 kW) e 520 Nm torque<br>
+      Aceleração: 0–100 km/h em ~4,2 s<br>
+      Velocidade máxima: 270 km/h (com AMG Dynamics Pack)<br>
+      Transmissão: automática 9 marchas AMG SPEEDSHIFT TCT<br>
+      Tração: integral 4MATIC+<br>
+      Consumo médio: 9,4–9,7 L/100 km (WLTP)<br>
+      Preço: R$ 650.000<br>
+      Capacidade do tanque: ~66 L<br>
+      Porta‑malas: ~420 L<br>
+      Equipamentos de série: AMG Ride Control, bancos esportivos, display curvo MBUX, rodas 19″, ADAS completos<br>
+      Garantia: 5 anos ou ilimitado
+    `
+  },
+
+  "EClassAllTerrain": {
+    titulo: "Mercedes E‑Class All‑Terrain E 450 4MATIC",
+    imagem: "imagens/mercedes_eclass_allterrain.png",
+    descricao: `
+      Motor: 3.0 L inline‑6 turbo mild‑hybrid<br>
+      Potência: 367 cv<br>
+      Aceleração: 0–100 km/h em ~5,0 s<br>
+      Velocidade máxima: 250 km/h (limitada)<br>
+      Transmissão: automática 9 marchas 9G‑TRONIC<br>
+      Tração: integral 4MATIC<br>
+      Consumo médio: 6,2–6,9 L/100 km (WLTP)<br>
+      Preço: R$ 450.000<br>
+      Capacidade do tanque: 66 L<br>
+      Porta‑malas: ~640 L (station wagon + perua)<br>
+      Equipamentos de série: suspensão a ar, pacote Off‑Road, HUD, MBUX, freios avançados<br>
+      Garantia: 3 anos ou 150.000 km
+    `
+  },
+
+  "SL63": {
+    titulo: "Mercedes‑AMG SL 63",
+    imagem: "imagens/mercedes_amg_sl_63.png",
+    descricao: `
+      Motor: 4.0 L V8 biturbo<br>
+      Potência: 585 cv e 800 Nm torque<br>
+      Aceleração: 0–100 km/h em ~3,6 s<br>
+      Velocidade máxima: 315 km/h<br>
+      Transmissão: automática 9 marchas<br>
+      Tração: integral 4MATIC+<br>
+      Consumo médio: 11,8–12,7 L/100 km<br>
+      Preço: R$ 900.000<br>
+      Capacidade do tanque: 70 L<br>
+      Porta‑malas: 213 L<br>
+      Equipamentos de série: capota elétrica, rodas 21″, bancos Burmester, suspensão adaptativa e freios carbono‑cerâmicos opcionais<br>
+      Garantia: 3 anos ou 100.000 km
+    `
+  },
+
+  "GLCCoupeAMG": {
+    titulo: "Mercedes GLC Coupé AMG Line",
+    imagem: "imagens/mercedes_glc_coupe_amg.png",
+    descricao: `
+      Motor: 2.0 L inline‑4 turbo<br>
+      Potência: ~258 cv (GLC 300) ou 300 cv (AMG Line opcional)<br>
+      Aceleração: ~6,5 s 0–100 km/h (GLC 300)<br>
+      Velocidade máxima: ~240 km/h<br>
+      Transmissão: automática 9 marchas<br>
+      Tração: integral 4MATIC<br>
+      Consumo médio: ~8,5 L/100 km<br>
+      Preço: R$ 350.000<br>
+      Capacidade do tanque: ~66 L<br>
+      Porta‑malas: 350–545 L (435 L médio) com rebatimento<br>
+      Equipamentos de série: pacote AMG Line, bancos Artico‑Nappa, rodas 19″, MBUX, teto solar panorâmico<br>
+      Garantia: 3 anos ou 100.000 km
+    `
+  }
+
+};
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('fade-in');
+
+  const modelo = getQueryParam('modelo');
+  const tituloCarro = document.getElementById('tituloCarro');
+  const imagemCarro = document.getElementById('imagemCarro');
+  const descricaoCarro = document.getElementById('descricaoCarro');
+
+  if (modelo && carros[modelo]) {
+    modeloAtual = modelo;
+    tituloCarro.innerText = carros[modelo].titulo;
+    imagemCarro.src = carros[modelo].imagem;
+    imagemCarro.alt = carros[modelo].titulo;
+
+    const textoDiv = descricaoCarro.querySelector('.textoDescricao');
+    if (textoDiv) {
+      textoDiv.innerHTML = carros[modelo].descricao;
+    }
+  } else {
+    tituloCarro.innerText = 'Carro não encontrado';
+    imagemCarro.src = '';
+    const textoDiv = descricaoCarro.querySelector('.textoDescricao');
+    if (textoDiv) {
+      textoDiv.innerText = 'Por favor, volte e escolha um carro válido.';
+    }
+  }
+});
+
+
+// CPF
+function formatarCPF(input) {
+  let numeros = input.value.replace(/\D/g, '');
+
+  if (numeros.length > 11) {
+    numeros = numeros.slice(0, 11);
+  }
+
+  let formatado = '';
+
+  if (numeros.length > 0) {
+    formatado += numeros.substring(0, 3);
+  }
+  if (numeros.length >= 4) {
+    formatado += '.' + numeros.substring(3, 6);
+  }
+  if (numeros.length >= 7) {
+    formatado += '.' + numeros.substring(6, 9);
+  }
+  if (numeros.length >= 10) {
+    formatado += '-' + numeros.substring(9, 11);
+  }
+
+  input.value = formatado;
+  verificarCampos(); // Chama verificação ao digitar o CPF
+}
+
+
+
+// telefone 
+function limitarTelefone(input) {
+  let numeros = input.value.replace(/\D/g, '');
+
+  if (numeros.length > 11) {
+    numeros = numeros.slice(0, 11);
+  }
+
+  let formatado = '';
+
+  if (numeros.length > 0) {
+    formatado += '(' + numeros.substring(0, 2);
+  }
+  if (numeros.length >= 3) {
+    formatado += ') ' + numeros.substring(2, 7);
+  }
+  if (numeros.length >= 8) {
+    formatado += '-' + numeros.substring(7, 11);
+  }
+
+  input.value = formatado;
+  verificarCampos(); // Chama verificação ao digitar o telefone
+}
+
+function verificarCampos() {
+  const inputs = document.querySelectorAll('.formularioContato input[type="text"], .formularioContato input[type="tel"], .formularioContato input[type="email"]');
+  const radios = document.querySelectorAll('.botoesTratamento input[type="radio"]');
+  const radioSelecionado = Array.from(radios).some(radio => radio.checked);
+
+  // Captura valores individuais
+  const telefone = document.querySelector('input[type="tel"]').value.replace(/\D/g, '');
+  const cpf = document.getElementById('cpf').value.replace(/\D/g, '');
+  const email = document.querySelector('input[type="email"]').value.trim();
+
+  // Verificações personalizadas
+  const telefoneValido = telefone.length === 11;
+  const cpfValido = cpf.length === 11;
+  const emailValido = email.endsWith('@gmail.com');
+
+  const inputsPreenchidos = Array.from(inputs).every(input => input.value.trim() !== "");
+
+  const botao = document.getElementById('botaoSolicitar');
+
+  if (inputsPreenchidos && radioSelecionado && telefoneValido && cpfValido && emailValido) {
+    botao.style.opacity = "1";
+    botao.disabled = false;
+  } else {
+    botao.style.opacity = "0";
+    botao.disabled = true;
+  }
+}
+
+
+
+
+
+// botao pra aparecer dps de clicar no botao de solicitar compra
+
+document.addEventListener("DOMContentLoaded", function () {
+  const botaoSolicitar = document.getElementById("botaoSolicitar");
+  if (botaoSolicitar) {
+    botaoSolicitar.addEventListener("click", function () {
+      const overlay = document.getElementById("overlayExclusivo");
+      overlay.classList.add("ativo");
+    });
+  }
+
+  const botaoRetornar = document.querySelector(".botao-retornar");
+  if (botaoRetornar) {
+    botaoRetornar.addEventListener("click", function () {
+      const overlay = document.getElementById("overlayExclusivo");
+      overlay.classList.remove("ativo");
+
+      setTimeout(() => {
+        window.location.href = "siteCompras.html";
+      }, 300); // espera a animação de desaparecer (opcional)
+    });
+  }
+});

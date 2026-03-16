@@ -1,0 +1,708 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* porsche */
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&display=swap");
+
+/* lamborghini*/
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap");
+
+/* ferrari*/
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap");
+
+/* maserati */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');
+
+/* BMW */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+/* mercedes */
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;700&display=swap");
+
+body {
+  margin: 0;
+  padding-top: 76px;
+  font-family: Arial, sans-serif;
+  background-color: #141414;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body.fade-in {
+  opacity: 1;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: rgb(10, 10, 10);
+  border-bottom: 3px solid #e2c505;
+}
+
+.logo img {
+  height: 65px;
+}
+
+.botaoCarrosNovos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  padding: 11px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.5s;
+  width: 300px;
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.botaoCarrosNovos:hover {
+  background-color: #959595;
+}
+
+.centralizarBotao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.fadein {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+
+.fadeout {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.caixaMarcas {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background-color: #e2c505;
+  padding: 10px 20px;
+  border-radius: 8px;
+  display: flex;
+  gap: 15px;
+  z-index: 1001;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+.caixaMarcas.ativa {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.botaoMarcas {
+  background: none;
+  border: none;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  padding: 5px 15px;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.botaoMarcas:hover {
+  background-color: #00000088;
+  color: white;
+}
+
+/* carro em destaque texto rocheda e sal */
+
+.destaqueContainer {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.caixaTexto {
+  position: relative;
+  width: 900px;
+  height: 120px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 16px;
+  border: 2px solid #e2c505;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.textoDestaque {
+  font-size: 36px;
+  color: white;
+  font-family: 'Merriweather', serif;
+  text-align: center;
+  margin: 0;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.caixaTexto {
+  position: relative;
+  width: 450px;
+  height: 75px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 16px;
+  border: 2px solid #e2c505;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textoDestaque {
+  font-size: 32px;
+  color: white;
+  font-family: 'Merriweather', serif;
+  text-align: center;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Bolinha com interrogação */
+.pontoDeInterrogacao {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  background-color: #e2c505;
+  color: black;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.pontoDeInterrogacao:hover {
+  transform: scale(1.1);
+}
+
+/* Tooltip (texto que aparece fora da bolinha) */
+.pqEmDestaque {
+  position: absolute;
+  top: 0;
+  right: 40px;
+  width: 260px;
+  background-color: white;
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+/* Mostrar o texto apenas ao passar o mouse sobre a bolinha */
+.pontoDeInterrogacao:hover .pqEmDestaque {
+  opacity: 1;
+}
+
+
+/* animacao da lamborghinii */
+
+.lamborghiniComprasIntro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagemWrapper {
+  position: relative;
+  display: inline-block;
+  width: 1000px;
+  height: 450px;
+  background-color: rgb(247, 247, 247);
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border: 4px solid rgb(70, 70, 70);
+}
+
+.imagemWrapper:hover {
+  transform: scale(1.05);
+}
+
+.imagemIntro {
+  position: absolute;
+  top: -5px;
+  left: 45px;
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.imagemBase {
+  opacity: 1;
+  z-index: 1;
+}
+
+.imagemHover {
+  opacity: 0;
+  z-index: 2;
+}
+
+.imagemWrapper:hover .imagemHover {
+  opacity: 1;
+}
+
+.imagemWrapper:hover .imagemBase {
+  opacity: 0;
+}
+
+.barraInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  text-align: center;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  font-family: 'Montserrat', sans-serif;
+  border-top: 3px solid rgba(0, 0, 0, 0.4);
+  z-index: 3;
+}
+
+.imagemWrapper:hover .barraInfo {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+.barraInfo .titulo {
+  margin: 0;
+  font-weight: bold;
+  font-size: 18px;
+  font-family: 'Merriweather', serif;
+}
+
+.barraInfo .subtitulo {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+
+/* barra do site */
+.barraDoSitePorsche {
+  margin-top: 100px;
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 4px solid rgb(255, 255, 255);
+  border-bottom: 4px solid rgb(255, 255, 255);
+  background-color: black;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+}
+
+.barraDoSiteLamborghini {
+  margin-top: 100px;
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 4px solid rgb(255, 255, 255);
+  border-bottom: 4px solid rgb(255, 255, 255);
+  background-color: black;
+  font-family: 'League Spartan', sans-serif;
+  font-weight: bold;
+}
+
+.barraDoSiteFerrari {
+  margin-top: 100px;
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 4px solid rgb(255, 255, 255);
+  border-bottom: 4px solid rgb(255, 255, 255);
+  background-color: black;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+}
+
+.barraDoSiteMercedes {
+  margin-top: 100px;
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 4px solid rgb(255, 255, 255);
+  border-bottom: 4px solid rgb(255, 255, 255);
+  background-color: black;
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight: bold;
+}
+
+.barraDoSiteBMW {
+  margin-top: 100px;
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 4px solid rgb(255, 255, 255);
+  border-bottom: 4px solid rgb(255, 255, 255);
+  background-color: black;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+
+.barraDoSiteMaserati {
+  margin-top: 100px;
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 4px solid rgb(255, 255, 255);
+  border-bottom: 4px solid rgb(255, 255, 255);
+  background-color: black;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: bold;
+}
+
+
+/* edicao das barras */
+
+.imagemNaBarra {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+.fundoDoNome {
+  position: relative;
+  z-index: 1;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-size: 100px;
+}
+
+
+/* botoes das compras dos carros */
+
+.carrosLadoaLado {
+  display: flex;
+  justify-content: center;
+  gap: 170px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 80px;
+}
+
+.posicaoBotaoDeCompra {
+  width: 450px;
+  background-color: rgb(250, 249, 248);
+  border: 4px solid rgb(70, 70, 70);
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 40px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.posicaoBotaoDeCompra img {
+  margin-top: 25px;
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.posicaoBotaoDeCompra:hover .subtituloCarro {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+.posicaoBotaoDeCompra:hover img {
+  transform: translateY(-10px);
+}
+
+.subtituloCarro {
+  background-color: #eee;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 15px;
+  font-weight: bold;
+  color: #052a75;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  border-top: 2px solid rgb(99, 99, 99);
+}
+
+.barraTopo {
+  background-color: #052a75;
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: bold;
+  border-bottom: 2px solid rgb(99, 99, 99);
+}
+
+
+/* footer */
+.footer {
+  background-color: rgb(10, 10, 10);
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-logo {
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+.footer h3 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.footer p {
+  margin-bottom: 20px;
+}
+
+/* links do footer */
+.footer-links {
+  margin-bottom: 15px;
+}
+
+.footer-links a {
+  color: #bbb;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+/* Redes sociais */
+.footer-social h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.instagram-link {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.instagram-link i {
+  margin-right: 8px;
+  color: #e1306c;
+}
+
+.instagram-link:hover {
+  color: #fff;
+}
+.instagram-link a {
+  display: inline-flex;
+  align-items: center;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.instagram-link a:hover {
+  color: #fff;
+}
+.insta-link{
+    color: #e1306c;
+    margin-right:8px;
+    text-decoration: none;
+    transition:color 0,3s;
+}
+.instagram-link {
+  color: #e1306c;
+  font-size: 20px;
+  text-decoration: none;
+  margin-right: 8px;
+  transition: color 0.3s;
+}
+
+.instagram-link:hover {
+  color: #fff;
+}
+
+.instagram-text {
+  font-size: 18px;
+  color: #ccc;
+}
+.instagram-link {
+  color: #e1306c;
+  font-size: 20px;
+  text-decoration: none;
+  margin-right: 8px;
+  transition: color 0.3s;
+}
+
+.instagram-link:hover {
+  color: #fff;
+}
+
+.instagram-text {
+  font-size: 18px;
+  color: #ccc;
+}
+.instagram-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0; /* sem espaço entre ícone e texto */
+}
+
+.instagram-link {
+  color: #e1306c;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.instagram-link:hover {
+  color: #fff;
+}
+
+.instagram-text {
+  font-size: 18px;
+  color: #ccc;
+}
+/* Link "Sobre" com transição suave */
+.footer-links a {
+  color: #bbb;
+  margin: 0 10px;
+  text-decoration: none;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.footer-links a:hover {
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Instagram layout */
+.instagram-inline {
+  display: inline-flex;
+  align-items: center;
+}
+
+.instagram-link {
+  color: #e1306c;
+  font-size: 20px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.instagram-link:hover {
+  color: #fff;
+}
+
+.instagram-link i {
+  margin-right: 4px; /* Reduz o espaço entre ícone e texto */
+}
+
+.instagram-text {
+  font-size: 18px;
+  color: #ccc;
+  margin-left: 0;
+}
+.aviso-imagens {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 30px;
+}

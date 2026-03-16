@@ -1,0 +1,65 @@
+// animação do texto
+const textos = ["CARROS NOVOS", "MELHORES OFERTAS"];
+let index = 0;
+const spanTexto = document.getElementById("textoBotao");
+
+setInterval(() => {
+  spanTexto.classList.remove("fadein");
+  spanTexto.classList.add("fadeout");
+
+  setTimeout(() => {
+    index = (index + 1) % textos.length;
+    spanTexto.textContent = textos[index];
+
+    spanTexto.classList.remove("fadeout");
+    spanTexto.classList.add("fadein");
+  }, 350); 
+}, 4000); 
+
+// Animação de fade-in ao carregar a página
+window.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('fade-in');
+});
+
+// ir para o html de compras apenas mudando a imagem
+const params = new URLSearchParams(window.location.search);
+const modelo = params.get('modelo');
+
+
+
+if (modelo && imagens[modelo]) {
+  // Seleciona o elemento da imagem na página
+  const imgElemento = document.getElementById('imagemCarro');
+
+  if (imgElemento) {
+    imgElemento.src = imagens[modelo];
+  }
+}
+
+//botao carros novos na navbar
+const botaoCarrosNovos = document.getElementById('carrosNovos');
+const caixaMarcas = document.getElementById('caixaMarcas');
+
+botaoCarrosNovos.addEventListener('click', () => {
+  caixaMarcas.classList.toggle('ativa');
+});
+
+// Botões de marcas com rolagem suave
+document.querySelectorAll('.botaoMarcas').forEach((botao) => {
+  botao.addEventListener('click', () => {
+    // Obtém o ID da seção a partir do atributo data-secao
+    const idSecao = botao.getAttribute('data-secao');
+
+    // Fecha a caixa de marcas
+    caixaMarcas.classList.remove('ativa');
+
+    // Faz o  sscrolluave até a seção
+    const elemento = document.getElementById(idSecao);
+    if (elemento) {
+      elemento.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  });
+});

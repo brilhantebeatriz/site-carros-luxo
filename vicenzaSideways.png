@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <link rel="stylesheet" href="sobreNos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <meta charset="UTF-8">
+  <title>Sobre Nós - Vicenza Empoli</title>
+
+  <header>
+    <img src="vicenzaEmpoli.png" alt="Logo Vicenza">
+    <h1>Sobre nós</h1>
+  </header>
+
+  <div class="imagemPrincipal">
+    <img src="VicenzaSideways.png" alt="Imagem principal">
+  </div>
+
+  <div class="text-section">
+    <!-- Aqui você escreve o texto depois -->
+    <p>Somos quatro estudantes da EEEP Professora Luiza de Teodoro Vieira, do curso técnico em Informática. Criamos a
+      Vicenza Empoli, uma empresa fictícia de carros de luxo, para aplicar nossos conhecimentos em design, marketing e
+      organização empresarial.
+
+      Cada um assumiu um papel na empresa, e o projeto foi orientado pelo professor Aloísio Sousa, coordenador do
+      curso. Trabalhamos com foco em criatividade, trabalho em equipe e simulação do mercado real.</p>
+  </div>
+
+  <div class="we-section">
+
+    <h1>EQUIPE</h1>
+  </div>
+
+  <div class="team-section">
+    <div class="team-member">
+      <img src="imagens/beatriz.png">
+      <div class="member-info">
+        <h3>
+          <a href="https://www.instagram.com/beatriizbrilhante" target="_blank" class="insta-link">
+            <i class="fab fa-instagram"></i>
+          </a>
+          Beatriz Brilhante - Fundadora & Social Media
+        </h3>
+        <p>Criadora da marca, apaixonada por design automotivo e inovação. Ela idealizou a empresa para unir luxo,
+          performance e exclusividade.</p>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="imagens/rayane.png">
+      <div class="member-info">
+        <h3>
+          <a href="https://www.instagram.com/anysilvva_" target="_blank" class="insta-link">
+            <i class="fab fa-instagram"></i>
+          </a>
+          Rayane Silva - Social Media & Designer
+        </h3>
+        <p>Cuida das redes sociais e da identidade visual da marca. Cria postagens, campanhas e mantém o estilo
+          elegante da Vicenza Empoli.</p>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="imagens/rafael.png">
+      <div class="member-info">
+        <h3>
+          <a href="https://www.instagram.com/rafaeleu_" target="_blank" class="insta-link">
+            <i class="fab fa-instagram"></i>
+          </a>
+          Pablo Rafael - Gerente de Parcerias e Vendas
+        </h3>
+        <p>Faz parcerias com outras marcas, cuida das vendas e negocia com clientes importantes. Representa a empresa
+          em eventos e acordos comerciais.</p>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="imagens/jabez.png">
+      <div class="member-info">
+        <h3>
+          <a href="https://www.instagram.com/jabez_oliveira7" target="_blank" class="insta-link">
+            <i class="fab fa-instagram"></i>
+          </a>
+          Jabez Mendonça - CEO
+        </h3>
+        <p>Responsável por liderar a empresa, tomar decisões estratégicas e expandir a marca no mercado de carros de
+          luxo.</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

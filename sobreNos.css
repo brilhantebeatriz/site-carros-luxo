@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vicenza Empoli</title>
+  <link rel="stylesheet" href="CSSdoSite.css">
+</head>
+
+<body>
+
+  <!-- animacao de intro -->
+  <div id="animacaointro">
+    <img id="logoIntro" src="vicenzaEmpoli.png" alt="Logo da Vicenza Empoli">
+  </div>
+
+
+  <div class="barra2"></div>
+
+  <!-- video do carro -->
+  <div id="introVideoArea">
+    <video id="video-fundo" autoplay muted loop>
+      <source src="VideoIntroVicenza.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="barra1"></div>
+  <div class="imagens/imagemDeFundoIntro.png"></div>
+
+
+    <div class="pqAVicenza">  
+      <p>• POR QUE A VICENZA?</p>
+    </div>
+
+    <div class="ladoALado">
+      <div class="carroETexto">
+        <div class="exemploImgCar">
+          <img src="carroExemplo.png" alt="exemplo">
+        </div>
+        <div class="empresasExemp">
+          <u><span class="letramaior">Essas empresas costumam oferecer:</span></u>
+          <ul>
+            <li>Preços <span class="sublinhadovermelho">exorbitantes</span> sem justificativa técnica.</li>
+            <li>Garantias <span class="sublinhadovermelho">limitadas.</span></li>
+            <li>Atendimento <span class="sublinhadovermelho">impessoal</span> e <span
+                class="sublinhado-vermelho">demorado.</span></li>
+            <li><span class="sublinhadovermelho">Custos altos</span> de manutenção.</li>
+            <li>Carros cheios de luxo, mas com <span class="sublinhadovermelho">pouca praticidade no dia a dia.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="carroETexto">
+        <div class="ImgCarVicenza">
+          <img src="carroExemplo.png" alt="exemplo">
+        </div>
+        <div class="empresasExemp">
+          <span class="letramaior"><u>O que a <span class="sublinhadoVicenza"><b>Vicenza</b></span> oferece:</u></span>
+          <ul>
+            <li><span class="sublinhadoverde">Preços justos</span>, com <span class="sublinhadoverde">transparência
+                total.</span></li>
+            <li>Carros com <span class="sublinhadoverde">garantia estendida</span>, para sua tranquilidade.</li>
+            <li>Atendimento personalizado, com foco nas suas <span class="sublinhadoverde">necessidades.</span></li>
+            <li><span class="sublinhadoverde">Baixo custo</span> de manutenção, com peças <span
+                class="sublinhadoverde">acessíveis.</span></li>
+            <li>Lucro inteligente: nós <span class="sublinhadoverde">crescemos</span> com você, e não em <span
+                class="sublinhadoverde">cima de você.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="barra1"></div>
+  </div>
+
+  <div class="mensagemVemOuNao" onclick="window.location.href='siteCompras.html'">
+    <span class="texto">E aí? Vai perder?</span>
+    <span class="seta">→</span>
+  </div>
+
+  <script src="JSintro.js"></script>
+</body>
+
+</html>
